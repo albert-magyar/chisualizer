@@ -153,7 +153,9 @@ class ChiselEmulatorSubprocess(ChiselApi):
         
     self.p.stdin.write(cmd + '\n')
     self.p.stdin.flush();
+    logging.debug("Sent command: %s", cmd);
     out = self.p.stdout.readline().strip()
+    logging.debug("Got response: %s", out);
     if out.startswith('error'):
       raise ValueError("Command '%s' returned error: '%s'" % (cmd, out))
     logging.debug("API: '%s' -> '%s'", cmd, out)

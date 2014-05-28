@@ -47,10 +47,6 @@ class VisualizerDescriptor(object):
     # TODO refactor this, probably makes more sense to set themes here
     return self.vis_root.get_theme()
 
-  def set_theme(self, theme):
-    # TODO: is persisrent theme state really the best idea?
-    self.vis_root.set_theme(theme)
-
 class VisualizerParseError(BaseException):
   pass
 
@@ -95,7 +91,7 @@ class Base(object):
     
   @staticmethod
   def from_xml(element, parent):
-    assert isinstance(element, etree.Element)
+    #assert isinstance(element, etree.Element)
     if element.tag in xml_registry:
       rtn = xml_registry[element.tag].from_xml_cls(element, parent)
       logging.debug("Loaded %s: '%s'", rtn.__class__.__name__, rtn.ref)
@@ -106,7 +102,7 @@ class Base(object):
   @classmethod
   def from_xml_cls(cls, element, parent):
     """Initializes this descriptor from a XML etree Element."""
-    assert isinstance(element, etree.Element)
+    #assert isinstance(element, etree.Element)
     new = cls()
     new.parent = parent
     new.root = parent.root
